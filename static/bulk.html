@@ -79,104 +79,54 @@
         </div>
         <div class="split-container">
             <div class="split-item">
-                <div>X Train</div>
+                <div id="x-train-title">X Train</div>
                 <div style="overflow-x: auto;width: 100%">
                     <table class="split-table" id="x-train-table">
                     </table>
                   </div>
             </div>
             <div class="split-item">
-                <div>Y Train</div>
+                <div id="y-train-title">Y Train</div>
                 <div style="overflow-x: auto;width: 100%">
                     <table class="split-table" id="y-train-table">
                     </table>
                   </div>
             </div>
             <div class="split-item">
-                <div>X Test</div>
+                <div id="x-test-title">X Test</div>
                 <div style="overflow-x: auto;width: 100%">
-                    <table class="split-table">
-                      <tr id="split-table-header">
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Points</th>
-                        <th>Points</th>
-                        <th>Points</th>
-                        <th>Points</th>
-                        <th>Points</th>
-                        <th>Points</th>
-                        <th>Points</th>
-                        <th>Points</th>
-                        <th>Points</th>
-                        <th>Points</th>
-                      </tr>
-                      <tr id="split-table-content">
-                        <td>Jill</td>
-                        <td>Smith</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td>50</td>
-                      </tr>
-                      <tr>
-                        <td>Eve</td>
-                        <td>Jackson</td>
-                        <td>94</td>
-                        <td>94</td>
-                        <td>94</td>
-                        <td>94</td>
-                        <td>94</td>
-                        <td>94</td>
-                        <td>94</td>
-                        <td>94</td>
-                        <td>94</td>
-                        <td>94</td>
-                      </tr>
-                      <tr>
-                        <td>Adam</td>
-                        <td>Johnson</td>
-                        <td>67</td>
-                        <td>67</td>
-                        <td>67</td>
-                        <td>67</td>
-                        <td>67</td>
-                        <td>67</td>
-                        <td>67</td>
-                        <td>67</td>
-                        <td>67</td>
-                        <td>67</td>
-                      </tr>
+                    <table class="split-table" id="x-test-table">
                     </table>
                   </div>
             </div>
             <div class="split-item">
-                <div>Y Test</div>
+                <div id="y-test-title">Y Test</div>
                 <div style="overflow-x: auto;width: 100%;">
-                    <table class="split-table">
-                      <tr id="split-table-header">
-                        <th>First Name</th>
-                      </tr>
-                      <tr id="split-table-content">
-                        <td>Jill</td>
-                        
-                      </tr>
-                      <tr>
-                        <td>Eve</td>
-                      </tr>
-                      <tr>
-                        <td>Adam</td>
-                      </tr>
+                    <table class="split-table" id="y-test-table">
                     </table>
                   </div>
             </div>
         </div>
     </div>
+
+    <div class="result-section hidden">
+        <div class="predicted-vs-real">
+            <!-- 
+            display predicted vs real price: 
+            * table head
+            * chart
+            -->
+        </div>
+        <div class="statistic-section">
+            <!-- 
+            display statistics: 
+            * r2
+            * mape
+            * mae 
+            -->
+        </div>
+    </div>
+
     <script src="{{ url_for('static', path='/bulk.js') }}"></script>
 </body>
 </html>

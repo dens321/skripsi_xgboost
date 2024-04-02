@@ -140,5 +140,42 @@ let split_button = document.getElementById("split-button");
 split_button.addEventListener("click", () => {
     let split_section = document.getElementById("split-section");
     split_section.classList.remove("hidden");
-    
+
+    populateTable(window.x_train, 'x-train-table');
+    document.getElementById('x-train-title').innerHTML = "X Train <br> Entries : " + window.x_train_shape[0];
+
+    populateTable(window.y_train, 'y-train-table');
+    document.getElementById('y-train-title').innerHTML = "Y Train <br> Entries : " + window.y_train_shape[0];
+
+    populateTable(window.y_test, 'y-test-table');
+    document.getElementById('y-test-title').innerHTML = "Y Test <br> Entries : " + window.y_test_shape[0];
+
+    populateTable(window.x_test, 'x-test-table');
+    document.getElementById('x-test-title').innerHTML = "X Test <br> Entries : " + window.x_test_shape[0];
 })
+
+function populateTable(df, table_id) {
+    let table = document.getElementById(table_id);
+    table.innerHTML = "";
+    let header_row = table.insertRow(0);
+    let columns = df.columns || df.name;
+    if (columns.constructor === Array) {
+        for (let column in columns){
+            header_row.insertCell(column).outerHTML = "<th>" + columns[column] + "</th>";
+        }
+    }
+    else {
+        header_row.insertCell(0).outerHTML = "<th>" + columns + "</th>";
+    }
+    for (let data in df.data) {
+        let row = table.insertRow(parseInt(data)+1);
+        if (df.data[data].constructor === Array){
+            for (let entry in df.data[data]){
+                row.insertCell(entry).innerHTML = df.data[data][entry];
+            }
+        }   
+        else {
+            row.insertCell(0).innerHTML = df.data[data]
+        }
+    }
+}
