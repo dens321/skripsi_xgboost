@@ -140,5 +140,5 @@ let split_button = document.getElementById("split-button");
 split_button.addEventListener("click", () => {
     let split_section = document.getElementById("split-section");
     split_section.classList.remove("hidden");
-    console.log(window.x_train);
+    
 })
