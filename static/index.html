@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Price Prediction</title>
+    <link rel="stylesheet" href="{{url_for('static', path='/index.css')}}">
+    <style>
+        .container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card-container">
+            <form id="myForm">
+                <div style="margin-top: 5px">
+                    <label for="tahun_kendaraan">Tahun kendaraan: </label><br>
+                    <input type="text" id="tahun_kendaraan" name="tahun_kendaraan" class="input-field-numeric"><br>
+                </div>
+    
+                <div style="margin-top: 5px;">
+                    <label for="kilometer">Kilometer: </label><br>
+                    <input type="text" id="kilometer" name="kilometer" class="input-field-numeric"><br>
+                </div>
+    
+                <div>
+                    <label for="kapasitas_kursi">Kapasitas kursi: </label><br>
+                    <input type="text" id="kapasitas_kursi" name="kapasitas_kursi" class="input-field-numeric"><br>
+                </div>
+    
+                <div>
+                    <label for="cc_mesin">CC Mesin: </label><br>
+                    <input type="text" id="cc_mesin" name="cc_mesin" class="input-field-numeric"><br>
+                </div>
+                
+                <div>
+                    <label for="warna">Warna: </label><br>
+                    <select name="warna" id="warna" class="input-field-categorical">
+                    </select><br>
+                </div>
+    
+                <div>
+                    <label for="transmisi">Transmisi: </label><br>
+                    <select name="transmisi" id="transmisi" class="input-field-categorical">
+                        <option value="Automatic">Automatic</option>
+                        <option value="Manual">Manual</option>
+                    </select><br>
+                </div>
+                
+                <div>
+                    <label for="tipe_bahan_bakar">Tipe bahan bakar</label><br>
+                    <select name="tipe_bahan_bakar" id="tipe_bahan_bakar" class="input-field-categorical">
+                        <option value="Bensin">Bensin</option>
+                        <option value="Solar">Solar</option>
+                    </select><br>
+                </div>
+
+                <div>
+                    <label for="merek">Merek</label><br>
+                    <select name="merek" id="merek" class="input-field-categorical">
+                    </select><br>
+                </div>
+
+    
+                <div class="submit-button">
+                    <input type="submit" value="Submit">
+                </div>
+                <div class="reset-button">
+                    <input id="reset" type="reset" value="Reset">
+                </div>
+            </form>
+            <!-- <div>Result: </div> -->
+            <div class="result">
+                <div class="title">Car Price Prediction Interface</div>
+                <div class="subtitle">Result: </div>
+                <div id="response">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', path='/index.js') }}"></script>
+</body>
+</html>

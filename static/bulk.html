@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Price Prediction</title>
+    <link rel="stylesheet" href="{{url_for('static', path='/bulk.css')}}">
+    <style>
+        .container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card-container">
+            <form id="myForm" method="post" action="/bulk/process">
+                <div class="upload-file">
+                    <label for="upload-file" style="text-align: center; margin-bottom: 20px; font-size: 20px">Upload CSV File</label><br>
+                    <input type="file" accept=".csv" name="file" class="upload-file" multiple>
+                </div>
+                <div class="error-container hidden" id="error-container"></div>
+                <div class="success-container hidden" id="success-container"></div>
+                <div class="buttons-container">
+                    <div class="submit-button">
+                        <input type="submit" value="Submit">
+                    </div>
+                    <div style="width: 100px"></div>
+                    <div class="reset-button">
+                        <input id="reset" type="reset" value="Reset">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="loading-container hidden" id="loading-container">
+        <div class="center">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+        </div>
+        <div>
+            Loading Data, Please wait
+        </div>
+    </div>
+    <!-- add hidden -->
+    <div class="post-upload-container hidden" id="post-upload-container">
+        <div class="post-upload-title">
+            Dataset Head (First 5 Entries)
+            <hr>
+        </div>
+        <div style="overflow-x: auto;width: 95%">
+            <table class="table-preview" id="table-preview">
+            </table>
+        </div>
+    </div>
+    <div class="preprocess-button hidden" id="preprocess">
+        <button id="preprocess-button">Preprocess</button>
+    </div>
+    <div class="preprocess-button hidden" id="split">
+        <button id="split-button">Split Data</button>
+    </div>
+    <!-- add hidden here -->
+    <div class="split-section hidden" id="split-section">
+        <div class="post-upload-title">
+            Data Split
+            <hr>
+        </div>
+        <div class="split-container">
+            <div class="split-item" >
+                <div>X Train</div>
+                <div style="overflow-x: auto;width: 100%">
+                    <table class="split-table">
+                      <tr id="split-table-header">
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                      </tr>
+                      <tr id="split-table-content">
+                        <td>Jill</td>
+                        <td>Smith</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                      </tr>
+                      <tr>
+                        <td>Eve</td>
+                        <td>Jackson</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                      </tr>
+                      <tr>
+                        <td>Adam</td>
+                        <td>Johnson</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                      </tr>
+                    </table>
+                  </div>
+            </div>
+            <div class="split-item">
+                <div>Y Train</div>
+                <div style="overflow-x: auto;width: 100%">
+                    <table class="split-table">
+                      <tr id="split-table-header">
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                      </tr>
+                      <tr id="split-table-content">
+                        <td>Jill</td>
+                        <td>Smith</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                      </tr>
+                      <tr>
+                        <td>Eve</td>
+                        <td>Jackson</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                      </tr>
+                      <tr>
+                        <td>Adam</td>
+                        <td>Johnson</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                      </tr>
+                    </table>
+                  </div>
+            </div>
+            <div class="split-item">
+                <div>X Test</div>
+                <div style="overflow-x: auto;width: 100%">
+                    <table class="split-table">
+                      <tr id="split-table-header">
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                      </tr>
+                      <tr id="split-table-content">
+                        <td>Jill</td>
+                        <td>Smith</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                      </tr>
+                      <tr>
+                        <td>Eve</td>
+                        <td>Jackson</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                      </tr>
+                      <tr>
+                        <td>Adam</td>
+                        <td>Johnson</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                      </tr>
+                    </table>
+                  </div>
+            </div>
+            <div class="split-item">
+                <div>Y Test</div>
+                <div style="overflow-x: auto;width: 100%;">
+                    <table class="split-table">
+                      <tr id="split-table-header">
+                        <th>First Name</th>
+                      </tr>
+                      <tr id="split-table-content">
+                        <td>Jill</td>
+                        
+                      </tr>
+                      <tr>
+                        <td>Eve</td>
+                      </tr>
+                      <tr>
+                        <td>Adam</td>
+                      </tr>
+                    </table>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', path='/bulk.js') }}"></script>
+</body>
+</html>
