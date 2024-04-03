@@ -109,8 +109,18 @@
         </div>
     </div>
 
-    <div class="result-section hidden">
+    <div class="preprocess-button hidden" id="result">
+        <button id="result-button">Result</button>
+    </div>
+
+    <div class="result-section hidden" id="result-section">
         <div class="predicted-vs-real">
+            <div class="split-item" style="overflow-x: auto;width: 100%;">
+                <table class="split-table" id="y-pred-table"></table>
+            </div>
+            <div class="split-item">
+                <table class="split-table" id="y-true-table"></table>
+            </div>
             <!-- 
             display predicted vs real price: 
             * table head
@@ -118,12 +128,18 @@
             -->
         </div>
         <div class="statistic-section">
-            <!-- 
-            display statistics: 
-            * r2
-            * mape
-            * mae 
-            -->
+            <div class="statistic-item">
+                <div class="statistic-heading">R2 Score</div><br>
+                <div id="r2-score"></div>
+            </div>
+            <div class="statistic-item">
+                <div class="statistic-heading">MAPE (Mean Absolute Percentage Error)</div><br>
+                <div id="mape"></div>
+            </div>
+            <div class="statistic-item">
+                <div class="statistic-heading">MAE (Mean Absolute Percentage)</div><br>
+                <div id="mae"></div>
+            </div>
         </div>
     </div>
 

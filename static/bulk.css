@@ -322,6 +322,26 @@ hr {
    border: 1px solid black;
 }
 
+.predicted-vs-real {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.statistic-section {
+    text-align: center;
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+.statistic-item {
+    padding: 8px;
+}
+
+.statistic-heading {
+    font-size: 20px;
+}
+
 .hidden {
     display: none;
 }

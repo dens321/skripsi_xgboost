@@ -48,6 +48,10 @@ function handleSubmit(event) {
             window.y_test = JSON.parse(resp_obj.y_test) || [];
             window.y_test_shape = resp_obj.y_test_shape;
 
+            window.y_pred = resp_obj.y_pred;
+
+            window.statistics = resp_obj.statistics;
+
             // display success message
             let success_container = document.getElementById("success-container");
             success_container.innerHTML = "Data successfully uploaded, scroll down to see the results";
@@ -152,6 +156,28 @@ split_button.addEventListener("click", () => {
 
     populateTable(window.x_test, 'x-test-table');
     document.getElementById('x-test-title').innerHTML = "X Test <br> Entries : " + window.x_test_shape[0];
+
+    document.getElementById('result').classList.remove("hidden");
+})
+
+let result_button = document.getElementById('result-button');
+result_button.addEventListener('click', () => {
+    document.getElementById('result-section').classList.remove('hidden');
+    let table = document.getElementById('y-pred-table');
+    table.innerHTML = "";
+    let header_row = table.insertRow(0);
+    let columns = "Predicted Value";
+    header_row .insertCell(0).outerHTML = "<th>" + columns+ "</th>";
+    for(let data in window.y_pred) {
+        let row = table.insertRow(parseInt(data)+1);
+        row.insertCell(0).innerHTML = window.y_pred[data]
+    }
+
+    populateTable(window.y_test, 'y-true-table')
+
+    document.getElementById('r2-score').innerHTML = window.statistics.r2;
+    document.getElementById('mape').innerHTML = window.statistics.mape;
+    document.getElementById('mae').innerHTML = window.statistics.mae;
 })
 
 function populateTable(df, table_id) {
