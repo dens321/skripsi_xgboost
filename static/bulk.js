@@ -173,14 +173,14 @@ result_button.addEventListener('click', () => {
         row.insertCell(0).innerHTML = window.y_pred[data]
     }
 
-    populateTable(window.y_test, 'y-true-table')
+    populateTable(window.y_test, 'y-true-table', actual_value=true);
 
     document.getElementById('r2-score').innerHTML = window.statistics.r2;
     document.getElementById('mape').innerHTML = window.statistics.mape;
     document.getElementById('mae').innerHTML = window.statistics.mae;
 })
 
-function populateTable(df, table_id) {
+function populateTable(df, table_id, actual_value=false) {
     let table = document.getElementById(table_id);
     table.innerHTML = "";
     let header_row = table.insertRow(0);
@@ -191,6 +191,9 @@ function populateTable(df, table_id) {
         }
     }
     else {
+        if(actual_value){
+            columns = "Actual Value";
+        }
         header_row.insertCell(0).outerHTML = "<th>" + columns + "</th>";
     }
     for (let data in df.data) {
