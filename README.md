@@ -28,7 +28,7 @@ To run the Car Price Prediction API, follow these steps:
    
 # About the Model
 ## XGBoost Model & Data Collection
-The model was trained using data collected from indonesian car marketplace (mobil123.com). The data collected spans from February to March.
+The model was trained using data collected from indonesian car marketplace (mobil123.com). The data collected spans from February 2024 to March 2024.
 The features that were used to train the model are: 
 - tahun kendaraan (car year)
 - kilometer (milage)
