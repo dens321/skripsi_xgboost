@@ -41,6 +41,11 @@ form.addEventListener("submit", (e) => {
             body: JSON.stringify(json_data)
         }).then(resp => resp.text())
         .then(data => {
+            let data_obj = JSON.parse(data)
+            if (data_obj.error){
+                document.getElementById("response").innerHTML = data_obj.message;
+                return;
+            }
             const formatter = new Intl.NumberFormat('en-US', {
                 style: 'currency',
                 currency: 'IDR',

@@ -30,7 +30,7 @@ async def prediction(request: Request):
     numerical_fields = ['tahun_kendaraan', 'kilometer', 'kapasitas_kursi', 'cc_mesin']
     for field in numerical_fields:
         if not json_data[field].isnumeric():
-            return f"Invalid value for field {field}. Value given: {json_data[field]}"
+            return {'error': True,'message': f"Invalid value for field {field}. Value given: {json_data[field]}"}
 
     tahun_kendaraan = int(json_data["tahun_kendaraan"])
     kilometer = int(json_data["kilometer"])
